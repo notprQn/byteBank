@@ -1,10 +1,10 @@
 // Contrutor Primário //
-open class Conta(
+abstract class Conta(
     var titular: String,
     val numero: Int
 ) {
     var saldo = 0.0
-        private set
+        protected set
 
     // Construtor Secundário //
     //    constructor(titular: String, numero: Int){
@@ -18,13 +18,7 @@ open class Conta(
         }
     }
 
-    open fun sacar(valor: Double) {
-        if (this.saldo >= valor) {
-            saldo -= valor
-        } else {
-            println("Não pode sacar, Quandtidade de dinheiro da conta: ${saldo}")
-        }
-    }
+    abstract fun sacar(valor: Double)
 
     fun transferir(destino: Conta, valor: Double): Boolean {
         if (saldo >= valor) {

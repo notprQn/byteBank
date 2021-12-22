@@ -1,5 +1,5 @@
 fun testaFuncionarios() {
-    val joao = Funcionario(
+    val joao = Analista(
         nome = "João",
         cpf = "111.111.111-11",
         salario = 1000.0
@@ -57,11 +57,30 @@ fun testaFuncionarios() {
         salario = 2500.00
     )
 
+    println("Nome da Analista: ${maria.nome}")
+    println("CPF do Analista: ${maria.cpf}")
+    println("Salario do Analista: ${maria.salario}")
+    println("Bonificação do ${maria.nome}: ${maria.bonificacao}")
+    println()
+
+    val clara = Auxiliar(
+        nome = "Clara",
+        cpf = "555.555.555-55",
+        salario = 500.00
+    )
+
+    println("Nome da Auxiliar: ${clara.nome}")
+    println("CPF do Auxiliar: ${clara.cpf}")
+    println("Salario do Auxiliar: ${clara.salario}")
+    println("Bonificação do ${clara.nome}: ${clara.bonificacao}")
+    println()
+
     val calculadora = CalculadoraBonificacao()
     calculadora.regsitrar(joao)
     calculadora.regsitrar(alex)
     calculadora.regsitrar(alec)
     calculadora.regsitrar(maria)
+    calculadora.regsitrar(clara)
 
     println("Total de Bonificação: ${calculadora.total}")
 }
