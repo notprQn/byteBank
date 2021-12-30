@@ -1,42 +1,70 @@
 import br.com.alura.modelo.*
+import br.com.alura.teste.bigDecimalArrayOf
+import br.com.alura.teste.calculaAumentoRelativo
+import br.com.alura.teste.media
+import br.com.alura.teste.somatoria
+import java.lang.ClassCastException
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-fun main(){
-    val endereco = Endereco(
-        logradouro = "Rua vergueiro",
-        complemento = "Alura",
-        cep = "00000-0700"
-    )
-    val enderecoNovo = Endereco(
-        logradouro = "Rua vergueiro",
-        complemento = "Alura",
-        cep = "00000-0700"
-    )
+fun main() {
+    val salarios1 = bigDecimalArrayOf("1500.00", "2000.00", "5000.00", "10000.00")
+    println(salarios1.contentToString())
 
-    val endereco = Endereco()
-    val enderecoNovo = Endereco()
+    val aumento = "1.1".toBigDecimal()
+    val salariosComAumento: Array<BigDecimal> = salarios1
+        .map { salario ->
+            calculaAumentoRelativo(salario, aumento)
+        }
+        .toTypedArray()
 
-    println("Vendo se uma função é igual a outra:")
-    println(endereco.equals(enderecoNovo))
-    println()
+    println(salariosComAumento.contentToString())
 
-    println("Vendo o hashCode de cada função:")
-    println(endereco.hashCode())
-    println(enderecoNovo.hashCode())
-    println()
+    val gastoInicial = salariosComAumento.somatoria()
+    println(gastoInicial)
 
-    println("Vendo o toString da Função:")
-    println(endereco.toString())
-    println(enderecoNovo.toString())
-    println()
+    val meses = 6.toBigDecimal()
+    val gastoTotal = salariosComAumento.fold(gastoInicial) { acumulador, salario ->
+        acumulador + (salario * meses).setScale(2, RoundingMode.UP)
+    }
+    println(gastoTotal)
 
-    println("toSting 'Personalizado':")
-    println("${endereco.javaClass}@${
-        Integer.toHexString(endereco.hashCode())
-    }")
+    val media = salariosComAumento
+        .sorted()
+        .takeLast(3)
+        .toTypedArray()
+        .media()
+    println(media)
 
+    val mediaMaior = salariosComAumento
+        .sorted()
+        .take(3)
+        .toTypedArray()
+        .media()
+    println(mediaMaior)
 }
 
-fun imprime(valor: Any) : Any{
-    println(valor)
-    return valor
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
